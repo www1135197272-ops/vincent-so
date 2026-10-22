@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="修仙生存 MVP 試玩版：活過三夜妖潮，建聚靈陣、突破煉氣，斬殺妖將。">
+<style>html,body{margin:0}</style>
+</head>
+<body>
+<title>修仙生存灰盒</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+  /* 版面：夜色洞府——上方毛筆標題，中間 16:9 遊戲窗，下方按鍵與流程。單一夜色主題（刻意不做淺色）。 */
+  :root {
+    --ink: #0b0d18;          /* 夜空底色 */
+    --ink-2: #141829;        /* 面板 */
+    --line: #2a3050;         /* 分隔線 */
+    --mist: #c9cfe6;         /* 正文 */
+    --mist-dim: #8d94b4;     /* 次要文字 */
+    --jade: #7fe0f5;         /* 靈氣青 */
+    --ember: #ff9a4a;        /* 篝火橙 */
+    --display: "Ma Shan Zheng", "STKaiti", "KaiTi", "BiauKai", serif;
+    --body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+    color-scheme: dark;
+  }
+  html, body { background: var(--ink); color: var(--mist); }
+  body {
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 20px 40px;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(127, 224, 245, 0.08), transparent 70%),
+      radial-gradient(ellipse 40% 30% at 50% 100%, rgba(255, 154, 74, 0.06), transparent 70%),
+      var(--ink);
+    min-height: 100%;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; display: grid; gap: 20px; }
+
+  header { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(40px, 7vw, 64px);
+    line-height: 1;
+    margin: 0;
+    color: #e9ecf8;
+    letter-spacing: 0.04em;
+    text-shadow: 0 0 24px rgba(127, 224, 245, 0.25);
+  }
+  .tag { color: var(--mist-dim); margin: 0; text-wrap: balance; }
+  .tag b { color: var(--jade); font-weight: 500; }
+  .badge {
+    font-size: 12px; letter-spacing: 0.12em; color: var(--ember);
+    border: 1px solid rgba(255, 154, 74, 0.4); padding: 3px 10px; border-radius: 2px;
+  }
+
+  .stage {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #05060c;
+    border: 1px solid var(--line);
+    box-shadow: 0 0 0 4px #070912, 0 20px 60px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+  }
+  #unity-canvas { width: 100%; height: 100%; display: block; background: #05060c; outline: none; }
+
+  .overlay {
+    position: absolute; inset: 0;
+    display: grid; place-items: center; align-content: center; gap: 18px;
+    background: radial-gradient(ellipse at center, #141a33 0%, #05060c 75%);
+    text-align: center; padding: 24px;
+  }
+  .overlay .glyph { font-family: var(--display); font-size: clamp(56px, 10vw, 110px); line-height: 1; color: var(--jade); opacity: 0.9; text-shadow: 0 0 30px rgba(127, 224, 245, 0.45); }
+  .bar { width: min(360px, 70vw); height: 6px; background: #1b2140; border-radius: 3px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--jade), #c8f6ff); transition: width 0.2s; }
+  .status { color: var(--mist-dim); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .status.err { color: #ff8a80; max-width: 520px; }
+
+  .hd-right { display: flex; align-items: center; gap: 12px; }
+  button {
+    font: inherit; font-size: 13px; color: var(--mist);
+    background: rgba(20, 24, 41, 0.85); border: 1px solid var(--line);
+    padding: 6px 12px; border-radius: 3px; cursor: pointer;
+  }
+  button:hover { border-color: var(--jade); color: #fff; }
+  button:focus-visible { outline: 2px solid var(--jade); outline-offset: 2px; }
+
+  .info { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 820px) { .info { grid-template-columns: minmax(0, 1fr); } }
+  section.card { background: var(--ink-2); border: 1px solid var(--line); padding: 18px 20px; min-width: 0; }
+  h2 { font-size: 13px; letter-spacing: 0.16em; color: var(--mist-dim); font-weight: 500; margin: 0 0 12px; }
+
+  .keys { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px 16px; margin: 0; padding: 0; list-style: none; }
+  .keys li { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  kbd {
+    font-family: var(--body); font-size: 12px; font-weight: 700; color: #e9ecf8;
+    min-width: 30px; padding: 3px 7px; text-align: center;
+    background: #1d2238; border: 1px solid #3a4268; border-bottom-width: 3px; border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  ol.path { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; counter-reset: step; }
+  ol.path li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: baseline; counter-increment: step; }
+  ol.path li::before {
+    content: counter(step);
+    font-size: 12px; font-weight: 700; color: var(--ink);
+    background: var(--mist-dim); width: 22px; height: 22px; border-radius: 50%;
+    display: grid; place-items: center;
+  }
+  ol.path li.night::before { background: var(--ember); }
+  ol.path li.xian::before { background: var(--jade); }
+  .muted { color: var(--mist-dim); font-size: 13px; margin: 12px 0 0; }
+
+  .mobile-note { display: none; color: var(--ember); font-size: 13px; }
+  @media (hover: none) and (pointer: coarse) { .mobile-note { display: block; } }
+  [hidden] { display: none !important; }
+  @media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <h1>修仙生存・灰盒</h1>
+      <p class="tag">活過三夜妖潮，建聚靈陣、<b>突破煉氣</b>，斬殺妖將。</p>
+    </div>
+    <div class="hd-right">
+      <button type="button" id="fs" hidden>全螢幕</button>
+      <span class="badge">灰盒試玩</span>
+    </div>
+  </header>
+
+  <p class="mobile-note">這個試玩版需要電腦鍵盤和滑鼠，請用電腦打開。</p>
+
+  <div class="stage" id="stage">
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+    <div class="overlay" id="overlay">
+      <div class="glyph">仙</div>
+      <div class="bar"><i id="bar"></i></div>
+      <div class="status" id="status">載入中… 0%</div>
+    </div>
+  </div>
+
+  <div class="info">
+    <section class="card">
+      <h2>操作</h2>
+      <ul class="keys">
+        <li><kbd>WASD</kbd> 移動</li>
+        <li><kbd>E</kbd> 採集・給篝火添柴</li>
+        <li><kbd>左鍵</kbd> 木劍普攻</li>
+        <li><kbd>B</kbd> 建造模式</li>
+        <li><kbd>1</kbd> 吃辟穀丹</li>
+        <li><kbd>Tab</kbd> 背包・合成・突破</li>
+        <li><kbd>Q</kbd> 引氣彈（突破後）</li>
+                <li><kbd>Esc</kbd> 暫停</li>
+        <li><kbd>0</kbd> 除錯面板</li>
+      </ul>
+      <p class="muted">先點一下遊戲畫面，鍵盤才會生效。有聲音，建議開喇叭或戴耳機。</p>
+    </section>
+    <section class="card">
+      <h2>一局的流程</h2>
+      <ol class="path">
+        <li>採木石，在空地槽位建篝火和工作台；工作台解鎖合成（辟穀丹、木質柵欄）</li>
+        <li class="night">第 1 夜：4 隻狼陸續來襲，用柵欄擋、用木劍打</li>
+        <li class="xian">找靈石和靈草，建聚靈陣，站在陣中累積修為</li>
+        <li class="xian">修為滿 100，按 Tab 突破煉氣，解鎖法術</li>
+        <li class="night">第 3 夜：妖將來襲，擊敗它或撐到天亮就通關</li>
+      </ol>
+      <p class="muted">一局約 8 分鐘。死亡後按 R 重新開始。</p>
+    </section>
+  </div>
+</div>
+
+<script>
+(function () {
+  var canvas = document.getElementById("unity-canvas");
+  var overlay = document.getElementById("overlay");
+  var bar = document.getElementById("bar");
+  var status = document.getElementById("status");
+  var fsBtn = document.getElementById("fs");
+  var stage = document.getElementById("stage");
+
+  canvas.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+  stage.addEventListener("mousedown", function () { canvas.focus(); });
+
+  function fail(msg) {
+    status.textContent = "無法載入遊戲：" + msg;
+    status.className = "status err";
+    bar.parentNode.hidden = true;
+  }
+
+  var config = {
+    arguments: [],
+    dataUrl: "GrayboxWeb.data.unityweb",
+    frameworkUrl: "GrayboxWeb.framework.js.unityweb",
+    codeUrl: "GrayboxWeb.wasm.unityweb",
+    streamingAssetsUrl: ".",
+    companyName: "XianxiaMVP",
+    productName: "修仙生存灰盒",
+    productVersion: "1.0",
+    showBanner: function (msg, type) {
+      if (type === "error") fail(msg);
+      else console.warn(msg);
+    }
+  };
+
+  var script = document.createElement("script");
+  script.src = "GrayboxWeb.loader.js";
+  script.onerror = function () { fail("載入程式下載失敗，請重新整理頁面。"); };
+  script.onload = function () {
+    if (typeof createUnityInstance !== "function") { fail("瀏覽器不支援。"); return; }
+    createUnityInstance(canvas, config, function (p) {
+      var pct = Math.round(p * 100);
+      bar.style.width = pct + "%";
+      status.textContent = (p < 0.9 ? "載入中… " : "啟動中… ") + pct + "%";
+    }).then(function (instance) {
+      overlay.hidden = true;
+      fsBtn.hidden = false;
+      canvas.focus();
+      fsBtn.addEventListener("click", function () {
+        try { instance.SetFullscreen(1); } catch (e) { console.warn(e); }
+      });
+    }).catch(function (err) {
+      fail(String(err && err.message ? err.message : err));
+    });
+  };
+  document.body.appendChild(script);
+})();
+</script>
+
+</body>
+</html>
