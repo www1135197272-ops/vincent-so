@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="修仙生存灰盒：色塊畫面的完整劇情試玩版。">
+<meta name="description" content="修仙生存 MVP 試玩版：活過三夜妖潮，建聚靈陣、突破煉氣，斬殺妖將。">
 <style>html,body{margin:0}</style>
 </head>
 <body>
@@ -129,11 +129,11 @@
   <header>
     <div class="brand">
       <h1>修仙生存・灰盒</h1>
-      <p class="tag">色塊試玩版：活過十一夜妖潮，第 11 天<b>拜師入宗門</b>，修到筑基後期識破師父的<b>奪舍</b>陰謀。</p>
+      <p class="tag">活過三夜妖潮，建聚靈陣、<b>突破煉氣</b>，斬殺妖將。</p>
     </div>
     <div class="hd-right">
       <button type="button" id="fs" hidden>全螢幕</button>
-      <span class="badge">灰盒試玩・完整劇情</span>
+      <span class="badge">灰盒試玩</span>
     </div>
   </header>
 
@@ -153,42 +153,27 @@
       <h2>操作</h2>
       <ul class="keys">
         <li><kbd>WASD</kbd> 移動</li>
-        <li><kbd>E</kbd> 採集・添柴・撿通天圖・上下機甲・進出山洞・宗門傳送陣・找師父</li>
-        <li><kbd>左鍵</kbd> 武器普攻</li>
-        <li><kbd>右鍵</kbd> 武器技能</li>
-        <li><kbd>1–9</kbd> 物品・法術・召喚</li>
-        <li><kbd>B</kbd> 自由建造</li>
-        <li><kbd>Tab</kbd> 背包・合成・技能・裝備</li>
-        <li><kbd>R</kbd> 打坐煉魂</li>
-        <li><kbd>V</kbd> 神識</li>
-        <li><kbd>空格</kbd> 御劍（筑基後，雙擊降落）</li>
-        <li><kbd>Z X C G</kbd> 召喚物和機甲 跟隨／攻擊／待命／召回</li>
-        <li><kbd>Esc</kbd> 暫停（長按 1 秒結算）</li>
+        <li><kbd>E</kbd> 採集・給篝火添柴</li>
+        <li><kbd>左鍵</kbd> 木劍普攻</li>
+        <li><kbd>B</kbd> 建造模式</li>
+        <li><kbd>1</kbd> 吃辟穀丹</li>
+        <li><kbd>Tab</kbd> 背包・合成・突破</li>
+        <li><kbd>Q</kbd> 引氣彈（突破後；耗靈 5、冷卻 1.5 秒、射程 5 格）</li>
+                <li><kbd>Esc</kbd> 暫停</li>
         <li><kbd>0</kbd> 除錯面板</li>
       </ul>
-      <p class="muted">先點一下遊戲畫面，鍵盤才會生效。有古風配樂，建議開聲音。天亮自動存檔。</p>
+      <p class="muted">先點一下遊戲畫面，鍵盤才會生效。有聲音，建議開喇叭或戴耳機。</p>
     </section>
     <section class="card">
       <h2>一局的流程</h2>
       <ol class="path">
-        <li>白天採木石、靈草、靈石；B 建篝火，祭壇旁建工作台，Tab 合成柵欄石牆</li>
-        <li class="night">入夜妖潮從北、東、南三口裂隙湧出；殺怪掉妖魂，靠近自動收進葫蘆</li>
-        <li class="xian">活過第 1 夜建聚靈陣；按 R 打坐把妖魂煉成修為，煉氣一～十二階</li>
-        <li class="night">第 3 夜妖將精英掉狼人之心（合筑基丹），50% 掉召喚小狼書</li>
-        <li class="xian">E 撿祭壇上的通天圖，解鎖武器、裝備、符籙配方；第 9、10 夜狼王、青羽妖禽來襲</li>
-        <li class="xian">召喚小狼最多 3 隻，用狼人之心升到 5 級；Z 跟隨、X 攻擊、C 待命、G 召回</li>
-        <li class="xian">筑基後：不再饑餓、空格御劍飛行（雙擊降落）、召喚變 6 級狼人 Boss</li>
-        <li class="xian">通天圖合成機甲，B 放下就自動巡邏：木靈近戰、石之投石；聚靈機甲要人開，右鍵重擊把怪轟飛 6–8 格</li>
-        <li class="xian">煉氣後走近機甲按 E 駕駛（耗神識 50），駕駛時只能用 V 神識，E 下機</li>
-        <li>白天從西邊洞口進山洞採庚金、打礦洞石妖；天黑自動傳回。庚金打成六件散件，五件合成斗神鎧</li>
-        <li class="night">第 11 夜四波妖潮最後是犀牛頭；第 12 夜起雙頭羊（之後每 3 夜一次），掉材料做角盔、腐息符、羊毛披風</li>
-        <li class="xian">第 11 天王天樂、秦天谷降臨，二選一拜師：得金釵如意或秦寶劍＋宗門傳送符（白天在背包點它回宗門）</li>
-        <li class="xian">宗門是安全區；左邊石門是你的洞府，可建工作台、修煉蒲團、儲物箱和裝飾</li>
-        <li class="night">修到筑基後期圓滿，回大殿請師父灌頂……先去看看殘碑 (28,24)，會看得更清楚</li>
-        <li>天亮自動存檔，下次打開可以「繼續」</li>
+        <li>採木石，在空地槽位建篝火和工作台；工作台解鎖合成（辟穀丹、木質柵欄）</li>
+        <li class="night">第 1 夜：4 隻狼陸續來襲，用柵欄擋、用木劍打</li>
+        <li class="xian">找靈石和靈草，建聚靈陣，站在陣中累積修為</li>
+        <li class="xian">修為滿 100，按 Tab 突破煉氣，解鎖法術</li>
+        <li class="night">第 3 夜：妖將來襲，擊敗它或撐到天亮就通關</li>
       </ol>
-      <p class="muted">死亡或長按 Esc 會顯示結算（最高夜數、最高境界、擊殺、用時），按 R 重開。</p>
-      <p class="muted">灰盒說明：畫面是色塊佔位，玩法、數值和劇情跟正式版一樣。</p>
+      <p class="muted">一局約 8 分鐘。死亡後按 R 重新開始。天黑前 10 秒畫面邊緣會泛紅、提示「妖潮即將來襲」。</p>
     </section>
   </div>
 </div>
