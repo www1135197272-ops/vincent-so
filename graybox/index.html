@@ -1,35 +1,35 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hans">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="修仙生存灰盒：色塊畫面的完整劇情試玩版。">
+<meta name="description" content="修仙生存灰盒：色块画面的完整剧情试玩版。">
 <style>html,body{margin:0}</style>
 </head>
 <body>
 <title>修仙生存灰盒</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&display=swap">
 <style>
-  /* 版面：夜色洞府——上方毛筆標題，中間 16:9 遊戲窗，下方按鍵與流程。單一夜色主題（刻意不做淺色）。 */
+  /* 版面：夜色洞府——上方毛笔标题，中间 16:9 游戏窗，下方按键与流程。单一夜色主题（刻意不做浅色）。 */
   :root {
     --ink: #0b0d18;          /* 夜空底色 */
     --ink-2: #141829;        /* 面板 */
-    --line: #2a3050;         /* 分隔線 */
+    --line: #2a3050;         /* 分隔线 */
     --mist: #c9cfe6;         /* 正文 */
-    --mist-dim: #8d94b4;     /* 次要文字 */
-    --jade: #7fe0f5;         /* 靈氣青 */
+    --mist-dim: #8d94b4;     /* 次要文本 */
+    --jade: #7fe0f5;         /* 灵气青 */
     --ember: #ff9a4a;        /* 篝火橙 */
-    --display: "Ma Shan Zheng", "STKaiti", "KaiTi", "BiauKai", serif;
-    --body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+    --display: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    --body: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
     color-scheme: dark;
   }
   html, body { background: var(--ink); color: var(--mist); }
   body {
     font-family: var(--body);
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 20px;
+    line-height: 1.75;
     padding-left: max(16px, env(safe-area-inset-left, 0px));
     padding-right: max(16px, env(safe-area-inset-right, 0px));
     padding-block: 20px 40px;
@@ -45,7 +45,7 @@
   .brand { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
   h1 {
     font-family: var(--display);
-    font-weight: 400;
+    font-weight: 900;
     font-size: clamp(40px, 7vw, 64px);
     line-height: 1;
     margin: 0;
@@ -56,7 +56,7 @@
   .tag { color: var(--mist-dim); margin: 0; text-wrap: balance; }
   .tag b { color: var(--jade); font-weight: 500; }
   .badge {
-    font-size: 12px; letter-spacing: 0.12em; color: var(--ember);
+    font-size: 16px; letter-spacing: 0.12em; color: var(--ember);
     border: 1px solid rgba(255, 154, 74, 0.4); padding: 3px 10px; border-radius: 2px;
   }
 
@@ -81,45 +81,45 @@
   .overlay .glyph { font-family: var(--display); font-size: clamp(56px, 10vw, 110px); line-height: 1; color: var(--jade); opacity: 0.9; text-shadow: 0 0 30px rgba(127, 224, 245, 0.45); }
   .bar { width: min(360px, 70vw); height: 6px; background: #1b2140; border-radius: 3px; overflow: hidden; }
   .bar > i { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--jade), #c8f6ff); transition: width 0.2s; }
-  .status { color: var(--mist-dim); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .status { color: var(--mist-dim); font-size: 16px; font-variant-numeric: tabular-nums; }
   .status.err { color: #ff8a80; max-width: 520px; }
 
   .hd-right { display: flex; align-items: center; gap: 12px; }
   button {
-    font: inherit; font-size: 13px; color: var(--mist);
+    font: inherit; font-size: 17px; color: var(--mist);
     background: rgba(20, 24, 41, 0.85); border: 1px solid var(--line);
     padding: 6px 12px; border-radius: 3px; cursor: pointer;
   }
   button:hover { border-color: var(--jade); color: #fff; }
   button:focus-visible { outline: 2px solid var(--jade); outline-offset: 2px; }
 
-  .info { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 20px; }
+  .info { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
   @media (max-width: 820px) { .info { grid-template-columns: minmax(0, 1fr); } }
   section.card { background: var(--ink-2); border: 1px solid var(--line); padding: 18px 20px; min-width: 0; }
-  h2 { font-size: 13px; letter-spacing: 0.16em; color: var(--mist-dim); font-weight: 500; margin: 0 0 12px; }
+  h2 { font-size: 19px; letter-spacing: 0.16em; color: var(--mist-dim); font-weight: 500; margin: 0 0 12px; }
 
-  .keys { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px 16px; margin: 0; padding: 0; list-style: none; }
+  .keys { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px 16px; margin: 0; padding: 0; list-style: none; }
   .keys li { display: flex; align-items: center; gap: 10px; min-width: 0; }
   kbd {
-    font-family: var(--body); font-size: 12px; font-weight: 700; color: #e9ecf8;
+    font-family: var(--body); font-size: 17px; font-weight: 700; color: #e9ecf8;
     min-width: 30px; padding: 3px 7px; text-align: center;
     background: #1d2238; border: 1px solid #3a4268; border-bottom-width: 3px; border-radius: 4px;
     white-space: nowrap;
   }
 
-  ol.path { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; counter-reset: step; }
-  ol.path li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: baseline; counter-increment: step; }
+  ol.path { list-style: none; margin: 0; padding: 0; columns: 2 520px; column-gap: 48px; counter-reset: step; }
+  ol.path li { display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: baseline; counter-increment: step; break-inside: avoid; margin-bottom: 12px; }
   ol.path li::before {
     content: counter(step);
-    font-size: 12px; font-weight: 700; color: var(--ink);
-    background: var(--mist-dim); width: 22px; height: 22px; border-radius: 50%;
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    background: var(--mist-dim); width: 26px; height: 26px; border-radius: 50%;
     display: grid; place-items: center;
   }
   ol.path li.night::before { background: var(--ember); }
   ol.path li.xian::before { background: var(--jade); }
-  .muted { color: var(--mist-dim); font-size: 13px; margin: 12px 0 0; }
+  .muted { color: var(--mist-dim); font-size: 18px; margin: 12px 0 0; }
 
-  .mobile-note { display: none; color: var(--ember); font-size: 13px; }
+  .mobile-note { display: none; color: var(--ember); font-size: 16px; }
   @media (hover: none) and (pointer: coarse) { .mobile-note { display: block; } }
   [hidden] { display: none !important; }
   @media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
@@ -129,22 +129,22 @@
   <header>
     <div class="brand">
       <h1>修仙生存・灰盒</h1>
-      <p class="tag">色塊試玩版：活過十一夜妖潮，第 11 天<b>拜師入宗門</b>，修到筑基後期識破師父的<b>奪舍</b>陰謀。</p>
+      <p class="tag">色块试玩版：活过十一夜妖潮，第 11 天<b>拜师入宗门</b>，修到筑基后期识破师父的<b>夺舍</b>阴谋。</p>
     </div>
     <div class="hd-right">
-      <button type="button" id="fs" hidden>全螢幕</button>
-      <span class="badge">灰盒試玩・完整劇情</span>
+      <button type="button" id="fs" hidden>全屏幕</button>
+      <span class="badge">灰盒试玩・完整剧情</span>
     </div>
   </header>
 
-  <p class="mobile-note">這個試玩版需要電腦鍵盤和滑鼠，請用電腦打開。</p>
+  <p class="mobile-note">这个试玩版需要电脑键盘和鼠标，请用电脑打开。</p>
 
   <div class="stage" id="stage">
     <canvas id="unity-canvas" tabindex="-1"></canvas>
     <div class="overlay" id="overlay">
       <div class="glyph">仙</div>
       <div class="bar"><i id="bar"></i></div>
-      <div class="status" id="status">載入中… 0%</div>
+      <div class="status" id="status">加载中… 0%</div>
     </div>
   </div>
 
@@ -152,43 +152,43 @@
     <section class="card">
       <h2>操作</h2>
       <ul class="keys">
-        <li><kbd>WASD</kbd> 移動</li>
-        <li><kbd>E</kbd> 採集・添柴・撿通天圖・上下機甲・進出山洞・宗門傳送陣・找師父</li>
-        <li><kbd>左鍵</kbd> 武器普攻</li>
-        <li><kbd>右鍵</kbd> 武器技能</li>
-        <li><kbd>1–9</kbd> 物品・法術・召喚</li>
+        <li><kbd>WASD</kbd> 移动</li>
+        <li><kbd>E</kbd> 采集・添柴・交互</li>
+        <li><kbd>左键</kbd> 武器普攻</li>
+        <li><kbd>右键</kbd> 武器技能</li>
+        <li><kbd>1–9</kbd> 物品・法术・召唤</li>
         <li><kbd>B</kbd> 自由建造</li>
-        <li><kbd>Tab</kbd> 背包・合成・技能・裝備</li>
-        <li><kbd>R</kbd> 打坐煉魂</li>
-        <li><kbd>V</kbd> 神識</li>
-        <li><kbd>空格</kbd> 御劍（筑基後，雙擊降落）</li>
-        <li><kbd>Z X C G</kbd> 召喚物和機甲 跟隨／攻擊／待命／召回</li>
-        <li><kbd>Esc</kbd> 暫停（長按 1 秒結算）</li>
-        <li><kbd>0</kbd> 除錯面板</li>
+        <li><kbd>Tab</kbd> 背包・合成・技能・装备</li>
+        <li><kbd>R</kbd> 打坐炼魂</li>
+        <li><kbd>V</kbd> 神识</li>
+        <li><kbd>空格</kbd> 御剑飞行（筑基后）</li>
+        <li><kbd>Z X C G</kbd> 召唤物指令</li>
+        <li><kbd>Esc</kbd> 暂停（长按结算）</li>
+        <li><kbd>0</kbd> 调试面板</li>
       </ul>
-      <p class="muted">先點一下遊戲畫面，鍵盤才會生效。有古風配樂，建議開聲音。天亮自動存檔。</p>
+      <p class="muted">先点一下游戏画面，键盘才会生效。有古风配乐，建议开声音。天亮自动存档。</p>
     </section>
     <section class="card">
       <h2>一局的流程</h2>
       <ol class="path">
-        <li>白天採木石、靈草、靈石；B 建篝火，祭壇旁建工作台，Tab 合成柵欄石牆</li>
-        <li class="night">入夜妖潮從北、東、南三口裂隙湧出；殺怪掉妖魂，靠近自動收進葫蘆</li>
-        <li class="xian">活過第 1 夜建聚靈陣；按 R 打坐把妖魂煉成修為，煉氣一～十二階</li>
-        <li class="night">第 3 夜妖將精英掉狼人之心（合筑基丹），50% 掉召喚小狼書</li>
-        <li class="xian">E 撿祭壇上的通天圖，解鎖武器、裝備、符籙配方；第 9、10 夜狼王、青羽妖禽來襲</li>
-        <li class="xian">召喚小狼最多 3 隻，用狼人之心升到 5 級；Z 跟隨、X 攻擊、C 待命、G 召回</li>
-        <li class="xian">筑基後：不再饑餓、空格御劍飛行（雙擊降落）、召喚變 6 級狼人 Boss</li>
-        <li class="xian">通天圖合成機甲，B 放下就自動巡邏：木靈近戰、石之投石；聚靈機甲要人開，右鍵重擊把怪轟飛 6–8 格</li>
-        <li class="xian">煉氣後走近機甲按 E 駕駛（耗神識 50），駕駛時只能用 V 神識，E 下機</li>
-        <li>白天從西邊洞口進山洞採庚金、打礦洞石妖；天黑自動傳回。庚金打成六件散件，五件合成斗神鎧</li>
-        <li class="night">第 11 夜四波妖潮最後是犀牛頭；第 12 夜起雙頭羊（之後每 3 夜一次），掉材料做角盔、腐息符、羊毛披風</li>
-        <li class="xian">第 11 天王天樂、秦天谷降臨，二選一拜師：得金釵如意或秦寶劍＋宗門傳送符（白天在背包點它回宗門）</li>
-        <li class="xian">宗門是安全區；左邊石門是你的洞府，可建工作台、修煉蒲團、儲物箱和裝飾</li>
-        <li class="night">修到筑基後期圓滿，回大殿請師父灌頂……先去看看殘碑 (28,24)，會看得更清楚</li>
-        <li>天亮自動存檔，下次打開可以「繼續」</li>
+        <li>白天采木石、灵草、灵石，B 建篝火，祭坛旁建工作台</li>
+        <li class="night">入夜妖潮从北、东、南三口裂隙涌出，杀怪掉妖魂</li>
+        <li class="xian">靠近妖魂自动收进葫芦，按 R 打坐把妖魂炼成修为</li>
+        <li class="xian">活过第 1 夜可建聚灵阵，站在阵中持续增加修为</li>
+        <li class="night">第 3 夜妖将精英出场，掉狼人之心，可合成筑基丹</li>
+        <li class="xian">捡起祭坛上的通天图，解锁武器、装备和符箓配方</li>
+        <li class="xian">学会召唤小狼，最多 3 只，用狼人之心升到 5 级</li>
+        <li class="xian">用通天图合成机甲，放下自动巡逻，炼气后可驾驶</li>
+        <li>白天进西边山洞采庚金，打造散件，合成斗神铠</li>
+        <li class="night">第 9、10 夜狼王、青羽来袭，第 11 夜是犀牛头</li>
+        <li class="xian">第 11 天两位师父降临，二选一拜师，拿到传送符</li>
+        <li class="xian">宗门是安全区，左边石门是洞府，可以在里面建造</li>
+        <li class="xian">筑基后不再饥饿，空格御剑飞行，召唤变狼人首领</li>
+        <li class="night">修到筑基后期圆满，回大殿请师父灌顶，先看残碑</li>
+        <li class="night">第 12 夜起双头羊来袭；天亮自动存档，可以继续</li>
       </ol>
-      <p class="muted">死亡或長按 Esc 會顯示結算（最高夜數、最高境界、擊殺、用時），按 R 重開。</p>
-      <p class="muted">灰盒說明：畫面是色塊佔位，玩法、數值和劇情跟正式版一樣。</p>
+      <p class="muted">死亡或长按 Esc 会显示结算（最高夜数、最高境界、击杀、用时），按 R 重开。</p>
+      <p class="muted">灰盒说明：画面是色块占位，玩法、数值和剧情跟正式版一样。</p>
     </section>
   </div>
 </div>
@@ -206,7 +206,7 @@
   stage.addEventListener("mousedown", function () { canvas.focus(); });
 
   function fail(msg) {
-    status.textContent = "無法載入遊戲：" + msg;
+    status.textContent = "无法加载游戏：" + msg;
     status.className = "status err";
     bar.parentNode.hidden = true;
   }
@@ -228,13 +228,13 @@
 
   var script = document.createElement("script");
   script.src = "GrayboxWeb.loader.js";
-  script.onerror = function () { fail("載入程式下載失敗，請重新整理頁面。"); };
+  script.onerror = function () { fail("引导程序下载失败，请刷新页面。"); };
   script.onload = function () {
-    if (typeof createUnityInstance !== "function") { fail("瀏覽器不支援。"); return; }
+    if (typeof createUnityInstance !== "function") { fail("浏览器不支持。"); return; }
     createUnityInstance(canvas, config, function (p) {
       var pct = Math.round(p * 100);
       bar.style.width = pct + "%";
-      status.textContent = (p < 0.9 ? "載入中… " : "啟動中… ") + pct + "%";
+      status.textContent = (p < 0.9 ? "加载中… " : "启动中… ") + pct + "%";
     }).then(function (instance) {
       overlay.hidden = true;
       fsBtn.hidden = false;
